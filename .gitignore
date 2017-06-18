@@ -79,3 +79,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+/Library
+/Temp
+/Assets/PostProcessing
+/Assets/PostProcessing.meta
+/Temp
+/Library
+/Assets/PostProcessing
+/Assets/PostProcessing.meta
