@@ -23,7 +23,6 @@ namespace Assets.MoveableLineRenderer.Scripts
             _lineRenderer.enabled = true;
             _lineRenderer.transform.parent = transform;
 
-            //todo add array pool
             _points = new Point[100];
         }
 
@@ -48,7 +47,6 @@ namespace Assets.MoveableLineRenderer.Scripts
 
             if (needAdd)
             {
-                //todo add array pool
                 if (_pointsCount == _points.Length)
                     System.Array.Resize(ref _points, _points.Length + 50);
 
@@ -96,10 +94,17 @@ namespace Assets.MoveableLineRenderer.Scripts
                 if (_points[i] == null)
                     continue;
 
-                float xCoord = _points[i].Position.x * Scale + Time.timeSinceLevelLoad * Speed;
-                float yCoord = _points[i].Position.z * Scale + Time.timeSinceLevelLoad * Speed;
+                var sTime = Time.timeSinceLevelLoad * Speed;
 
-                _points[i].Position.y += (Mathf.PerlinNoise(xCoord, yCoord) - 0.5f) * Height - Gravity;
+                var pointPosition = _points[i].Position;
+
+                float xCoord = pointPosition.x * Scale + sTime;
+                float yCoord = pointPosition.y * Scale + sTime;
+                float zCoord = pointPosition.z * Scale + sTime;
+
+                _points[i].Position.x += (Mathf.PerlinNoise(yCoord, zCoord) - 0.5f) * Height;
+                _points[i].Position.y += (Mathf.PerlinNoise(xCoord, zCoord) - 0.5f) * Height - Gravity;
+                _points[i].Position.z += (Mathf.PerlinNoise(xCoord, yCoord) - 0.5f) * Height;
             }
         }
     }
