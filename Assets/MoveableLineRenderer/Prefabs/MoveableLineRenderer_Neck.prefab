@@ -56,6 +56,6 @@ MonoBehaviour:
   MinVertexDistance: 0.01
   LifeTime: 1.8
   Scale: 1
-  Speed: 0.35
+  Speed: 0.12
   Height: 0.04
   Gravity: 0
